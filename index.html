@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Intus Care — IT Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     EDIT COLORS / BRAND HERE
+     ============================================================ */
+  :root{
+    --blue:#1f6feb;        /* primary action */
+    --blue-press:#175fd0;
+    --navy:#0b2a5b;        /* headings + logo dark */
+    --wash:#eaf2ff;        /* soft blue background wash */
+    --canvas:#ffffff;
+    --ink:#132339;         /* body text */
+    --muted:#5a6b85;       /* secondary text */
+    --border:#e3eaf5;
+    --green:#16a34a;
+    --radius:14px;
+    --maxw:640px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Inter",system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(120% 90% at 100% 0%, var(--wash) 0%, rgba(234,242,255,0) 55%),
+      var(--canvas);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--navy);letter-spacing:-.01em;line-height:1.15;margin:0}
+
+  /* ---- Top progress ---- */
+  .topbar{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;gap:16px;
+    padding:0 24px;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:20}
+  .logo{display:flex;align-items:center;gap:9px;font-family:"Space Grotesk";font-weight:700;font-size:18px;color:var(--navy)}
+  .logo .mark{width:22px;height:22px;border-radius:50%;background:var(--blue);position:relative;flex:none}
+  .logo .mark::before{content:"";position:absolute;inset:5px 5px auto auto;width:2px;height:12px;background:#fff;border-radius:2px;
+    box-shadow:5px 0 0 #fff,-5px 0 0 #fff;top:5px;right:auto;left:5px}
+  .logo .mark::after{content:"";position:absolute;left:5px;top:9px;width:12px;height:2px;background:#fff;border-radius:2px}
+  .logo b{color:var(--blue)}
+  .eyebrow{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .eyebrow .num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;
+    background:var(--navy);color:#fff;font-size:11px;margin-right:8px}
+  .pips{margin-left:auto;display:flex;gap:6px}
+  .pip{width:26px;height:5px;border-radius:99px;background:var(--border);transition:background .35s}
+  .pip.done{background:var(--blue)}
+  .pip.current{background:var(--navy)}
+
+  /* ---- Stage ---- */
+  .stage{min-height:100%;display:flex;align-items:center;justify-content:center;padding:96px 24px 64px}
+  .card{width:100%;max-width:var(--maxw);opacity:0;transform:translateY(10px);animation:rise .4s ease forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}}
+
+  .sec-label{font-size:13px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .sec-label .n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--blue);color:#fff;font-size:12px}
+  .card h1{font-size:34px;margin-bottom:18px}
+  .card h2{font-size:26px;margin-bottom:14px}
+  .body{font-size:17px;line-height:1.6;color:var(--ink)}
+  .body p{margin:0 0 14px}
+  .body strong{color:var(--navy)}
+  .body a{color:var(--blue);text-underline-offset:3px}
+  .body ol,.body ul{margin:0 0 14px;padding-left:22px;line-height:1.7}
+  .note{background:var(--wash);border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:15px;color:var(--muted);margin:0 0 16px}
+  .cred{font-family:"Space Grotesk";background:#0b2a5b;color:#dbe7ff;border-radius:12px;padding:14px 16px;font-size:15px;margin:0 0 16px;word-break:break-all}
+  .cred span{color:#7fb0ff}
+
+  /* image slot — swap the placeholder for <img src="..."> */
+  .shot{margin:6px 0 20px;border:1px dashed var(--border);border-radius:12px;background:#f7faff;
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;padding:20px}
+  .shot img{width:100%;height:100%;object-fit:contain;border-radius:12px}
+
+  /* ---- Buttons ---- */
+  .actions{margin-top:26px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .btn{font-family:"Inter";font-weight:600;font-size:16px;border:0;border-radius:10px;padding:12px 22px;cursor:pointer;
+    background:var(--blue);color:#fff;transition:background .15s,transform .05s}
+  .btn:hover{background:var(--blue-press)}
+  .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:3px solid #9cc4ff;outline-offset:2px}
+
+  .opts{display:flex;flex-direction:column;gap:10px;width:100%;max-width:420px}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1.5px solid var(--border);
+    border-radius:12px;padding:13px 15px;font-family:"Inter";font-size:16px;color:var(--navy);cursor:pointer;transition:.15s}
+  .opt:hover{border-color:var(--blue);background:#f5f9ff}
+  .opt:focus-visible{outline:3px solid #9cc4ff;outline-offset:2px}
+  .opt .key{flex:none;width:24px;height:24px;border-radius:6px;background:var(--navy);color:#fff;font-size:12px;font-weight:600;
+    display:flex;align-items:center;justify-content:center}
+  .opt.ghost{border-style:dashed;color:var(--muted)}
+  .opt.ghost .key{background:var(--muted)}
+
+  .hint{font-size:13px;color:var(--muted);margin-top:14px}
+  kbd{font-family:inherit;background:#fff;border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:12px}
+
+  /* ---- Help overlay ---- */
+  .help-btn{position:fixed;right:22px;bottom:22px;z-index:20;background:#fff;border:1px solid var(--border);border-radius:99px;
+    padding:10px 16px;font-family:"Inter";font-weight:600;font-size:14px;color:var(--navy);cursor:pointer;box-shadow:0 4px 16px rgba(11,42,91,.1)}
+  .overlay{position:fixed;inset:0;background:rgba(11,42,91,.45);display:none;align-items:center;justify-content:center;z-index:30;padding:24px}
+  .overlay.open{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:420px;width:100%;padding:26px}
+  .modal h3{font-size:20px;margin-bottom:10px}
+  .modal p{font-size:15px;line-height:1.6;color:var(--ink);margin:0 0 12px}
+  .modal .close{margin-top:6px}
+
+  /* ---- Done ---- */
+  .done-check{width:64px;height:64px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+  .done-check svg{width:32px;height:32px}
+
+  @media (max-width:560px){
+    .card h1{font-size:27px}.eyebrow{max-width:120px}.pips{gap:4px}.pip{width:16px}
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="logo"><span class="mark"></span>Intus<b>Care</b></div>
+    <div class="eyebrow" id="eyebrow"></div>
+    <div class="pips" id="pips"></div>
+  </div>
+
+  <div class="stage"><div class="card" id="card"></div></div>
+
+  <button class="help-btn" id="helpBtn">Need help?</button>
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <h3>IT Support</h3>
+      <p>Stuck on a step? Our IT helpdesk is here to help.</p>
+      <p><strong>Locked out of your laptop or email?</strong> Call <strong id="mPhone"></strong>.</p>
+      <p>For everything else — software access, logins, questions — email <a id="mMail" href="#"></a>.</p>
+      <button class="btn close" id="helpClose">Got it</button>
+    </div>
+  </div>
+
+<script>
+/* ==================================================================
+   CONFIG — edit these
+   ================================================================== */
+const CONFIG = {
+  helpdeskEmail: "helpdesk@intus.care",
+  helpdeskPhone: "617.870.3861 ext 250",
+  // When you self-host, paste a webhook URL (Power Automate / Zapier / Jira)
+  // to record completions. Left blank = nothing is sent.
+  completionWebhook: ""
+};
+
+/* Personalization from the URL, e.g.
+   intus-onboarding.html?fn=Evan&email=evan.yearwood@intus.care&laptop_type=Mac&laptop_tag=IC-0412
+   Anything omitted falls back to the defaults below.
+   NOTE: never pass a temporary password in the URL — deliver it separately. */
+const params = new URLSearchParams(location.search);
+const DATA = {
+  fn:         params.get("fn")         || "there",
+  email:      params.get("email")      || "your Intus email",
+  laptop_tag: params.get("laptop_tag") || "your asset tag",
+  laptop_type:params.get("laptop_type")|| ""     // "Mac" or "Windows" auto-skips the laptop question
+};
+
+/* ==================================================================
+   SECTIONS — drive the progress rail
+   ================================================================== */
+const SECTIONS = ["Getting started","New laptop password","Microsoft 365","1Password","NordLayer VPN"];
+
+/* ==================================================================
+   STEPS — this is the whole flow. Add / remove / reorder freely.
+   type: "info"  -> body + one primary button
+         "choice"-> body + option buttons that jump to a step id
+   Every step has: id, sec (section index), and title.
+   Use {{fn}}, {{email}}, {{laptop_tag}} for personalization.
+   For images, replace the placeholder text with: img:"path/to/shot.png"
+   ================================================================== */
+const STEPS = [
+  { id:"welcome", sec:0, title:"Welcome",
+    h:1, heading:"Welcome, {{fn}}! Day one begins here.",
+    body:`<p>Before onboarding can really kick off, we'll set up your Intus laptop with the essential tools you'll use every day. This guide walks you through each step.</p>
+          <p>Complete all steps so your work laptop is ready for the days ahead.</p>`,
+    next:"I'm ready" },
+
+  { id:"support", sec:0, title:"IT Support",
+    heading:"Meet your IT support",
+    body:`<p>Our IT helpdesk manages your tech and supports Intus staff. If you hit any difficulty in this guide, we're here to help.</p>
+          <div class="note"><strong>Completely locked out of your laptop or email?</strong> Call ${CONFIG.helpdeskPhone}.</div>
+          <p>For all other issues — software access, logins, or questions — email <a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a>.</p>`,
+    next:"Got it" },
+
+  { id:"overview", sec:0, title:"Overview",
+    heading:"Here are the accounts we'll set up",
+    body:`<p>These are the logins and tools Intus uses every day. Later, we'll bring in any job-specific tools you need.</p>
+          <p>Setup happens over two days:</p>
+          <p><strong>Day one</strong></p>
+          <ol><li>New laptop password</li><li>Your Microsoft 365 account & Outlook inbox</li><li>1Password, our password manager</li><li>NordLayer VPN</li><li>Security training</li></ol>
+          <p><strong>Day two</strong></p>
+          <ol start="6"><li>Atlassian</li><li>Airtable</li><li>Any accounts provisioned via Microsoft</li><li>Email invites for other team tools</li></ol>`,
+    next:"Let's begin" },
+
+  /* ---------- Section 1: Laptop password ---------- */
+  { id:"pw-intro", sec:1, title:"New Laptop Password",
+    heading:"New laptop password",
+    body:`<p>Let's replace your default laptop password with something <strong>unique</strong> and <strong>secure</strong>. We'll cover the guidelines, then show you how to update it.</p>
+          <div class="shot">[ Screenshot: laptop / macOS desktop ]</div>`,
+    next:"Continue" },
+
+  { id:"pw-secure", sec:1, title:"New Laptop Password",
+    heading:"What makes a password secure?",
+    body:`<p>Secure passwords protect your accounts and information. Follow these rules for every password you create:</p>
+          <ol>
+            <li><strong>Make it long</strong> — ideally 16+ characters, built from unrelated words (e.g. solarium-nutty-instep-banana).</li>
+            <li><strong>Make it unique</strong> — never reuse it for another login.</li>
+            <li><strong>Avoid common words</strong>, phrases, or number substitutions (e.g. Aw3s0m3!).</li>
+          </ol>
+          <p>Some services also require special characters, but length and uniqueness matter most.</p>`,
+    next:"See an example" },
+
+  { id:"pw-examples", sec:1, title:"New Laptop Password",
+    heading:"Password examples",
+    body:`<p>Try both examples at <a href="https://www.security.org/how-secure-is-my-password/" target="_blank" rel="noopener">Security.org — How secure is my password?</a></p>
+          <p><strong>Aw3s0m3!</strong> — cracked in about 8 hours.</p>
+          <p><strong>solarium-nutty-instep-banana</strong> — cracked in about 1 octillion years.</p>
+          <p>That's why longer wins. Now let's update your laptop password.</p>`,
+    next:"Continue", nextTo:"pw-router" },
+
+  /* Router: skip the question if laptop_type was passed in the URL */
+  { id:"pw-router", sec:1, title:"New Laptop Password", auto:true },
+
+  { id:"pw-ask", sec:1, title:"New Laptop Password",
+    heading:"What type of laptop are you using?",
+    body:``,
+    choices:[
+      { key:"A", label:"Mac", to:"pw-mac" },
+      { key:"B", label:"Windows", to:"pw-win" }
+    ]},
+
+  { id:"pw-mac", sec:1, title:"New Laptop Password",
+    heading:"Update your password (Mac)",
+    body:`<ol>
+            <li>Click the <strong>Apple icon</strong> in the top-left of the screen.</li>
+            <li>Go to <strong>System Settings → Users & Groups</strong>.</li>
+            <li>Click the ⓘ next to your name, then <strong>Change</strong> next to Password.</li>
+          </ol>
+          <div class="shot">[ Screenshot: macOS Users & Groups ]</div>`,
+    choices:[
+      { key:"A", label:"Password updated! Continue", to:"m365-intro" },
+      { key:"B", label:"I need some help", help:true }
+    ]},
+
+  { id:"pw-win", sec:1, title:"New Laptop Password",
+    heading:"Update your password (Windows)",
+    body:`<ol>
+            <li>Press <strong>Ctrl + Alt + Delete</strong>.</li>
+            <li>Choose <strong>Change a password</strong>.</li>
+            <li>Enter your current password, then your new secure password twice.</li>
+          </ol>
+          <div class="shot">[ Screenshot: Windows change password ]</div>`,
+    choices:[
+      { key:"A", label:"Password updated! Continue", to:"m365-intro" },
+      { key:"B", label:"I need some help", help:true }
+    ]},
+
+  /* ---------- Section 2: Microsoft 365 ---------- */
+  { id:"m365-intro", sec:2, title:"Microsoft 365",
+    heading:"Your Intus Microsoft 365 account & Outlook inbox",
+    body:`<p>Intus Care uses Microsoft 365 for company email, shared calendars, and file sharing. You'll also use it to sign in to other applications.</p>
+          <p>Let's get you logged in.</p>`,
+    next:"Set up Microsoft 365" },
+
+  { id:"m365-2fa", sec:2, title:"Microsoft 365",
+    heading:"First, a note on 2-step authentication (2FA)",
+    body:`<p>2-step authentication protects your account if a password is ever compromised. <strong>This step is required</strong> — skip it and you'll be locked out of Microsoft 365 soon after.</p>
+          <p>In general, setting up 2FA on any tool we use is strongly encouraged.</p>`,
+    next:"I understand" },
+
+  { id:"m365-activate", sec:2, title:"Microsoft 365",
+    heading:"Activate Microsoft 365 & set up 2FA",
+    body:`<p>1. In your browser, go to <a href="https://portal.office.com" target="_blank" rel="noopener">portal.office.com</a> and sign in:</p>
+          <div class="cred"><span>Username</span> &nbsp;{{email}}<br><span>Temporary password</span> &nbsp;sent to you separately in a secure message</div>
+          <div class="note">For security, we never send your temporary password in this link. Check the secure message we sent, or contact the helpdesk if you can't find it.</div>
+          <p>2. You'll be prompted to <strong>change your password</strong> on first sign-in — use the guidelines from earlier.</p>
+          <p>3. You'll then set up <strong>2-step authentication</strong>. If you aren't prompted, go to <a href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">mysignins.microsoft.com/security-info</a>. Choose your phone number or the Microsoft Authenticator app.</p>`,
+    choices:[
+      { key:"A", label:"2FA is enabled, continue", to:"op-intro" },
+      { key:"B", label:"I need some help", help:true }
+    ]},
+
+  /* ---------- Section 3: 1Password ---------- */
+  { id:"op-intro", sec:3, title:"1Password",
+    heading:"1Password, our company password manager",
+    body:`<p>A password manager makes it easy to create, save, and share passwords securely. We'll activate your account, turn off Chrome's manager, and share a few tips.</p>`,
+    next:"Continue" },
+
+  { id:"op-about", sec:3, title:"1Password",
+    heading:"About your 1Password account",
+    body:`<p>1Password creates, saves, and auto-fills secure passwords. Each time, it asks you to sign in with your Microsoft credentials — so you only remember one password for everything.</p>
+          <div class="note"><strong>Please don't use any other password manager</strong> (personal, or Chrome's built-in) for your company passwords. We'll show you how to turn off Chrome's manager next.</div>`,
+    next:"Got it, continue" },
+
+  { id:"op-activate", sec:3, title:"1Password",
+    heading:"1Password activation",
+    body:`<p>Check your inbox for an invite, then follow the steps in the email to create your account.</p>
+          <div class="note"><em>Please note</em> — after you accept, an administrator approves your account, which may take a short while.</div>`,
+    choices:[
+      { key:"A", label:"Account created!", to:"op-using" },
+      { key:"B", label:"I need some help", help:true }
+    ]},
+
+  { id:"op-using", sec:3, title:"1Password",
+    heading:"Using 1Password",
+    body:`<p>Pick whatever works for you — the browser extension is great if you only use it in your browser, while the desktop app manages passwords across apps.</p>
+          <ul>
+            <li><a href="#" target="_blank" rel="noopener">1Password Chrome extension</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Desktop app (Mac)</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Desktop app (Windows)</a></li>
+          </ul>
+          <p>Mobile apps are on the Apple App Store and Google Play. You can also sign in at <a href="https://intuscare.1password.com/signin" target="_blank" rel="noopener">intuscare.1password.com/signin</a>.</p>`,
+    next:"Continue" },
+
+  { id:"op-chrome", sec:3, title:"1Password",
+    heading:"Turn off Chrome's password manager",
+    body:`<p>If you use Chrome, turn off its built-in manager so 1Password can take over. (Not using Chrome? Skip this.)</p>
+          <ol>
+            <li>In the Chrome bar, go to <strong>chrome://password-manager/settings</strong>.</li>
+            <li>Turn off <strong>Offer to save passwords</strong> and <strong>Sign in automatically</strong>.</li>
+          </ol>
+          <div class="shot">[ Screenshot: Chrome password settings toggles ]</div>`,
+    next:"Continue" },
+
+  /* ---------- Section 4: NordLayer VPN ---------- */
+  { id:"nl-intro", sec:4, title:"NordLayer VPN",
+    heading:"NordLayer VPN",
+    body:`<p>You've been assigned a NordLayer VPN license. Follow the next steps carefully to set it up.</p>
+          <p>Any problems during setup? Email <a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a>.</p>`,
+    next:"Continue" },
+
+  { id:"nl-download", sec:4, title:"NordLayer VPN",
+    heading:"Download NordLayer",
+    body:`<ol>
+            <li><a href="https://nordlayer.com/download/" target="_blank" rel="noopener">Download NordLayer</a> — choose the correct version, Windows or macOS, for your laptop.</li>
+            <li>Install and launch NordLayer.</li>
+            <li>When asked for your <strong>Organization ID</strong>, enter <strong>intus-care</strong>.</li>
+          </ol>
+          <div class="shot">[ Screenshot: NordLayer Organization ID = intus-care ]</div>`,
+    next:"Next" },
+
+  { id:"nl-login", sec:4, title:"NordLayer VPN",
+    heading:"Logging in to NordLayer",
+    body:`<p>On the login page, click <strong>Entra ID</strong> — this signs you in with your Microsoft 365 credentials.</p>
+          <p>Any trouble? Email <a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a>.</p>`,
+    choices:[
+      { key:"A", label:"All set with NordLayer!", to:"done" },
+      { key:"B", label:"I need some help", help:true }
+    ]},
+
+  /* ---------- Finish ---------- */
+  { id:"done", sec:4, title:"Done", done:true,
+    heading:"You're all set, {{fn}}!",
+    body:`<p>Your laptop is ready and your core accounts are set up. Next up: complete your <strong>security training</strong> — once it's done, we'll finish provisioning the rest of your accounts.</p>
+          <p>Welcome to the team.</p>`,
+    next:"Finish setup" }
+];
+
+/* ==================================================================
+   ENGINE  (you shouldn't need to touch below here)
+   ================================================================== */
+const byId = Object.fromEntries(STEPS.map(s => [s.id, s]));
+const fill = str => (str||"").replace(/\{\{(\w+)\}\}/g, (_,k)=> DATA[k] ?? "");
+let currentId = "welcome";
+
+const cardEl = document.getElementById("card");
+const eyebrowEl = document.getElementById("eyebrow");
+const pipsEl = document.getElementById("pips");
+
+// build progress pips
+SECTIONS.forEach((_,i)=>{ const p=document.createElement("div"); p.className="pip"; p.dataset.i=i; pipsEl.appendChild(p); });
+
+function updatePips(sec){
+  [...pipsEl.children].forEach((p,i)=>{
+    p.className = "pip" + (i<sec ? " done" : i===sec ? " current" : "");
+  });
+}
+
+function nextIdInArray(id){
+  const i = STEPS.findIndex(s=>s.id===id);
+  return STEPS[i+1] ? STEPS[i+1].id : null;
+}
+
+function go(id){
+  const step = byId[id];
+  if(!step) return;
+
+  // auto router: skip laptop question if type known
+  if(step.auto){
+    return go(DATA.laptop_type ? ("pw-"+DATA.laptop_type.toLowerCase()) : "pw-ask");
+  }
+
+  currentId = id;
+  eyebrowEl.innerHTML = step.sec===0 ? "" : `<span class="num">${step.sec}</span>${step.title}`;
+  updatePips(step.sec);
+  render(step);
+  if(step.done) recordCompletion();
+  window.scrollTo({top:0});
+}
+
+function render(step){
+  let html = "";
+  if(step.sec>0 && !step.done) html += `<div class="sec-label"><span class="n">${step.sec}</span>${step.title}</div>`;
+
+  if(step.done){
+    html += `<div class="done-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>`;
+  }
+
+  html += `<${step.h===1?"h1":"h2"}>${fill(step.heading)}</${step.h===1?"h1":"h2"}>`;
+  if(step.body) html += `<div class="body">${fill(step.body)}</div>`;
+
+  // choices vs single next
+  if(step.choices){
+    html += `<div class="opts">`;
+    step.choices.forEach((c,idx)=>{
+      html += `<button class="opt${c.help?" ghost":""}" data-idx="${idx}"><span class="key">${c.key}</span>${c.label}</button>`;
+    });
+    html += `</div><div class="hint">Press <kbd>A</kbd> or <kbd>B</kbd> to choose</div>`;
+  } else {
+    const to = step.nextTo || nextIdInArray(step.id);
+    html += `<div class="actions"><button class="btn" data-to="${to}">${step.next||"Continue"}</button></div>`;
+    if(!step.done) html += `<div class="hint">Press <kbd>Enter</kbd> to continue</div>`;
+  }
+
+  cardEl.innerHTML = html;
+  cardEl.style.animation="none"; void cardEl.offsetWidth; cardEl.style.animation="";
+
+  // wire buttons
+  const nextBtn = cardEl.querySelector(".btn[data-to]");
+  if(nextBtn) nextBtn.addEventListener("click", ()=> go(nextBtn.dataset.to));
+  cardEl.querySelectorAll(".opt").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const c = step.choices[btn.dataset.idx];
+      if(c.help) return openHelp();
+      go(c.to);
+    });
+  });
+  (cardEl.querySelector(".btn,.opt")||{}).focus?.();
+}
+
+/* completion hook — fires on the done screen */
+function recordCompletion(){
+  if(!CONFIG.completionWebhook) return;
+  try{
+    fetch(CONFIG.completionWebhook, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ event:"it_setup_complete", name:DATA.fn, email:DATA.email, laptop_tag:DATA.laptop_tag, at:new Date().toISOString() })
+    });
+  }catch(e){ /* silent — don't block the user */ }
+}
+
+/* keyboard */
+document.addEventListener("keydown", e=>{
+  if(document.getElementById("overlay").classList.contains("open")) return;
+  const step = byId[currentId];
+  if(e.key==="Enter" && !step.choices){ const b=cardEl.querySelector(".btn[data-to]"); if(b) b.click(); }
+  if(step.choices){
+    if(e.key.toLowerCase()==="a") cardEl.querySelector('.opt[data-idx="0"]')?.click();
+    if(e.key.toLowerCase()==="b") cardEl.querySelector('.opt[data-idx="1"]')?.click();
+  }
+});
+
+/* help overlay */
+const overlay = document.getElementById("overlay");
+document.getElementById("mPhone").textContent = CONFIG.helpdeskPhone;
+const mMail = document.getElementById("mMail"); mMail.textContent = CONFIG.helpdeskEmail; mMail.href = "mailto:"+CONFIG.helpdeskEmail;
+function openHelp(){ overlay.classList.add("open"); }
+document.getElementById("helpBtn").addEventListener("click", openHelp);
+document.getElementById("helpClose").addEventListener("click", ()=> overlay.classList.remove("open"));
+overlay.addEventListener("click", e=>{ if(e.target===overlay) overlay.classList.remove("open"); });
+
+/* start */
+go("welcome");
+</script>
+</body>
+</html>
