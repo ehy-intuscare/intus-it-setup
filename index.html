@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Intus Care — IT Setup</title>
+<title>IntusCare IT Setup</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -15,28 +15,28 @@
   1. In this GitHub repo, create a folder called:  images
   2. Upload your screenshots into that folder, naming each file EXACTLY as
      listed below (PNG or JPG both fine).
-  3. That's it — the picture will appear automatically. Until a file exists,
-     you'll see a dashed grey "IMAGE" box on the page telling you what goes there.
+  3. That is it. The picture appears automatically. Until a file exists you
+     will see a dashed grey "IMAGE" box on the page telling you what goes there.
 
-  The 13 image files this page looks for (each is also marked inline below
-  with a big  >>> IMAGE ##  comment so you can find the exact spot):
+  The 13 image files this page looks for (each is also marked inline in the
+  STEPS list, search for  img:{file:  to find the exact spot):
 
-     images/01-intuscare-logo.png       Welcome screen — IntusCare logo
-     images/04-macbook.png              Laptop password intro — MacBook photo
-     images/07-mac-users-groups.png     Mac password — System Settings screenshot
-     images/07-windows-password.png     Windows password — change-password screenshot
-     images/12-1password-logo.png       1Password intro — 1Password logo
-     images/16-chrome-settings.png      Chrome — password settings screenshot
-     images/19-nordlayer-orgid.png      NordLayer — Organization ID screenshot
-     images/20-entra-id.png             NordLayer login — Entra ID button
-     images/21-slack-logo.png           Slack intro — Slack logo
-     images/22-m365-launcher-slack.png  Slack — M365 app launcher (arrow to Slack)
-     images/26-atlassian-login.png      Atlassian — login screenshot
-     images/27-airtable-sso.png         Airtable — SSO sign-in screenshot
-     images/28-outlook-launcher.png     Accessing via M365 — Outlook app launcher
+     images/01-intuscare-logo.png       Welcome screen, IntusCare logo
+     images/04-macbook.png              Laptop password intro, MacBook photo
+     images/07-mac-users-groups.png     Mac password, System Settings screenshot
+     images/07-windows-password.png     Windows password, Sign-in options screenshot
+     images/12-1password-logo.png       1Password intro, 1Password logo
+     images/16-chrome-settings.png      Chrome, password settings screenshot
+     images/19-nordlayer-orgid.png      NordLayer, Organization ID screenshot
+     images/20-entra-id.png             NordLayer login, Entra ID button
+     images/21-slack-logo.png           Slack intro, Slack logo
+     images/22-m365-launcher-slack.png  Slack, M365 app launcher (arrow to Slack)
+     images/26-atlassian-login.png      Atlassian, login screenshot
+     images/27-airtable-sso.png         Airtable, SSO sign-in screenshot
+     images/28-outlook-launcher.png     Accessing via M365, Outlook app launcher
 
-  To change ANY wording, scroll to the STEPS list further down and edit the
-  text between the quotes. To change support contacts, edit the CONFIG block.
+  To change wording, edit the text in the STEPS list. Support contacts live in
+  the CONFIG block at the top of the script.
   ============================================================================
 -->
 
@@ -54,18 +54,24 @@
     -webkit-font-smoothing:antialiased}
   h1,h2{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--navy);letter-spacing:-.01em;line-height:1.18;margin:0}
 
-  /* top progress + section bar */
+  /* top bar: progress + steps toggle + section label */
   .topbar{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(255,255,255,.9);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
   .progress{height:4px;background:var(--border)}
   .progress > i{display:block;height:100%;background:var(--blue);width:0;transition:width .35s ease}
-  .eyebrow{display:flex;align-items:center;gap:10px;height:46px;padding:0 24px;font-size:14px;font-weight:600;color:var(--muted)}
+  .bar-row{display:flex;align-items:center;gap:14px;height:48px;padding:0 18px}
+  .nav-toggle{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--border);
+    border-radius:8px;padding:6px 12px;font-family:"Inter";font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer}
+  .nav-toggle:hover{color:var(--navy);border-color:#c9d6ee;background:#f6f9ff}
+  .nav-toggle .lines{display:inline-block;width:15px;height:11px;position:relative}
+  .nav-toggle .lines::before,.nav-toggle .lines::after,.nav-toggle .lines i{content:"";position:absolute;left:0;right:0;height:2px;background:currentColor;border-radius:2px}
+  .nav-toggle .lines::before{top:0}.nav-toggle .lines i{top:4.5px}.nav-toggle .lines::after{bottom:0}
+  .eyebrow{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--muted)}
   .eyebrow .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
     border-radius:6px;background:var(--navy);color:#fff;font-size:12px}
-  .eyebrow.hidden{display:none}
 
   /* stage / card */
-  .stage{min-height:100%;display:flex;align-items:center;justify-content:center;padding:110px 24px 90px}
+  .stage{min-height:100%;display:flex;align-items:center;justify-content:center;padding:112px 24px 96px}
   .card{width:100%;max-width:var(--maxw);opacity:0;transform:translateY(10px);animation:rise .38s ease forwards}
   @keyframes rise{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}}
@@ -86,7 +92,7 @@
   .mono{font-family:"Space Grotesk";background:#0b2a5b;color:#dbe7ff;border-radius:10px;
     padding:4px 9px;font-size:14px;display:inline-block}
 
-  /* IMAGE SLOTS */
+  /* image slots */
   .shotwrap{margin:20px 0 6px}
   .shot{display:block;width:100%;max-width:560px;border-radius:12px;border:1px solid var(--border)}
   .shot-ph{width:100%;max-width:560px;min-height:190px;border:2px dashed #b9c8e6;border-radius:12px;
@@ -117,41 +123,88 @@
   .hint{font-size:13px;color:var(--muted);margin-top:14px}
   kbd{background:#fff;border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:12px}
 
+  /* floating Get help button */
+  .help-fab{position:fixed;right:20px;bottom:20px;z-index:30;display:inline-flex;align-items:center;gap:8px;
+    background:#fff;border:1px solid var(--border);border-radius:99px;padding:10px 16px;font-family:"Inter";
+    font-weight:600;font-size:14px;color:var(--navy);cursor:pointer;box-shadow:0 6px 20px rgba(11,42,91,.12)}
+  .help-fab:hover{border-color:var(--blue);color:var(--blue)}
+  .help-fab .q{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;
+    background:var(--blue);color:#fff;font-size:12px;font-weight:700}
+
   /* help modal */
-  .overlay{position:fixed;inset:0;background:rgba(11,42,91,.45);display:none;align-items:center;justify-content:center;z-index:30;padding:24px}
+  .overlay{position:fixed;inset:0;background:rgba(11,42,91,.45);display:none;align-items:center;justify-content:center;z-index:60;padding:24px}
   .overlay.open{display:flex}
-  .modal{background:#fff;border-radius:16px;max-width:430px;width:100%;padding:26px}
-  .modal h2{font-size:20px;margin-bottom:12px}
-  .modal p{font-size:15px;line-height:1.6;margin:0 0 10px}
+  .modal{background:#fff;border-radius:16px;max-width:440px;width:100%;padding:26px}
+  .modal h2{font-size:21px;margin-bottom:12px}
+  .modal p{font-size:15px;line-height:1.6;margin:0 0 12px}
+  .modal .chan{background:var(--wash);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+  .modal .chan .lbl{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:3px}
+
+  /* navigator drawer */
+  .scrim{position:fixed;inset:0;background:rgba(11,42,91,.35);z-index:39;opacity:0;pointer-events:none;transition:opacity .25s}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:82vw;z-index:40;background:#fff;
+    border-right:1px solid var(--border);box-shadow:8px 0 30px rgba(11,42,91,.12);
+    transform:translateX(-102%);transition:transform .28s ease;display:flex;flex-direction:column}
+  .drawer.open{transform:none}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border)}
+  .drawer-head b{font-family:"Space Grotesk";font-size:15px;color:var(--navy)}
+  .drawer-head button{background:none;border:0;font-size:20px;line-height:1;color:var(--muted);cursor:pointer}
+  .nav-list{overflow-y:auto;padding:8px 0 18px}
+  .nav-group{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#9aa8c2;padding:14px 18px 5px}
+  .nav-item{display:block;width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;
+    padding:8px 18px 8px 15px;font-family:"Inter";font-size:13.5px;color:var(--ink);cursor:pointer;line-height:1.35}
+  .nav-item:hover{background:#f5f9ff}
+  .nav-item.current{border-left-color:var(--blue);color:var(--blue);font-weight:600;background:#f5f9ff}
 
   .done-check{width:60px;height:60px;border-radius:50%;background:var(--green);
     display:flex;align-items:center;justify-content:center;margin-bottom:20px}
   .done-check svg{width:30px;height:30px}
 
-  @media (max-width:560px){.card h1{font-size:27px}.stage{padding:100px 18px 80px}}
+  @media (max-width:560px){.card h1{font-size:27px}.stage{padding:104px 18px 84px}.eyebrow{font-size:13px}}
 </style>
 </head>
 <body>
   <div class="topbar">
     <div class="progress"><i id="bar"></i></div>
-    <div class="eyebrow" id="eyebrow"></div>
+    <div class="bar-row">
+      <button class="nav-toggle" id="navToggle" aria-label="Open step navigator"><span class="lines"><i></i></span>Steps</button>
+      <div class="eyebrow" id="eyebrow"></div>
+    </div>
   </div>
 
   <div class="stage"><div class="card" id="card"></div></div>
 
+  <!-- floating help -->
+  <button class="help-fab" id="helpFab"><span class="q">?</span>Get help</button>
+
+  <!-- navigator -->
+  <div class="scrim" id="scrim"></div>
+  <nav class="drawer" id="drawer" aria-label="Step navigator">
+    <div class="drawer-head"><b>Jump to a step</b><button id="navClose" aria-label="Close">&times;</button></div>
+    <div class="nav-list" id="navList"></div>
+  </nav>
+
+  <!-- help modal -->
   <div class="overlay" id="overlay">
     <div class="modal">
-      <h2>Need a hand?</h2>
-      <p>Reach the IT helpdesk any time:</p>
-      <p><strong>Email:</strong> <a id="mMail" href="#"></a><br>
-         <strong>Slack:</strong> <span id="mSlack"></span></p>
-      <button class="btn" onclick="document.getElementById('overlay').classList.remove('open')">Got it</button>
+      <h2>Get help</h2>
+      <p>Stuck on any step? IntusCare IT is here to help. Reach us either way:</p>
+      <div class="chan">
+        <div class="lbl">Email</div>
+        <a id="mMail" href="#"></a>
+      </div>
+      <div class="chan">
+        <div class="lbl">Slack</div>
+        Message us in the <strong id="mSlack"></strong> channel on Slack. <span style="color:var(--muted)">(Slack is the messaging app you set up in this guide. Open it, search channels for that name, and post your question there.)</span>
+      </div>
+      <button class="btn" onclick="document.getElementById('overlay').classList.remove('open')">Close</button>
     </div>
   </div>
 
 <script>
 /* ============================================================
-   CONFIG — edit support contacts here
+   CONFIG - edit support contacts here
    ============================================================ */
 const CONFIG = {
   helpdeskEmail: "it@intuscare.atlassian.net",
@@ -159,45 +212,39 @@ const CONFIG = {
 };
 
 /* ============================================================
-   STEPS — the whole flow, in order. Edit text freely.
-   Fields:
-     id        unique name
-     section   1–6, or null for the Day-2 transition screens (no number)
-     secTitle  short label shown in the top bar
-     cover     true = section "cover" screen (big number by the heading, no top bar)
-     heading   the H1/H2 text
-     body      the paragraph HTML
-     img       { file, label }  -> renders an image slot (see HOW TO ADD IMAGES up top)
-     cta       label for the Continue button (default "Continue")
-     choices   A/B buttons instead of Continue:
-                 {key,label,action:'advance'|'help'|'goto', to?}
-     continueTo forces where Continue/advance goes (used for the Mac/Windows branch)
-     submit    true = final screen (Continue becomes "Submit")
+   STEPS - the whole flow, in order. Edit text freely.
+     id, group (used by the navigator), section (1-6 or null),
+     secTitle, cover, heading, body, img{file,label}, cta,
+     choices[{key,label,action:'advance'|'help'|'goto',to}],
+     continueTo (forces Continue target - used by Mac/Windows branch),
+     end (true = last screen, no forward button)
    ============================================================ */
 const STEPS = [
 
-  /* ---------- INTRO ---------- */
-  { id:"welcome", heading:"Welcome! Day one begins here.", h:1,
+  { id:"welcome", group:"Getting started", h:1,
+    heading:"Welcome! Day one begins here.",
     img:{file:"01-intuscare-logo.png", label:"IntusCare logo"},
-    body:`<p>Before onboarding can really kick off, we'll set up your Intus laptop with some essential communication and collaboration tools. This guide will take you step-by-step through the activation process for everything you need.</p>
+    body:`<p>Before onboarding can really kick off, we'll set up your Intus laptop with some essential communication and collaboration tools. This guide will take you step by step through the activation process for everything you need.</p>
           <p>Please complete all steps to ensure your work laptop is set up properly and you'll be equipped for the upcoming onboarding activities.</p>`,
     cta:"I'm ready!" },
 
-  { id:"support", heading:"Meet your IT support",
+  { id:"support", group:"Getting started",
+    heading:"Meet your IT support",
     body:`<p>Our IT helpdesk manages your tech and supports all Intus staff.</p>
           <p><strong>If you run into any difficulty with the steps in this guide, IT is here to help.</strong></p>
-          <p>For software access, logins, or questions, email <a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a> or message us on Slack at <strong>${CONFIG.helpdeskSlack}</strong>.</p>`,
+          <p>You can reach us any time using the <strong>Get help</strong> button in the bottom-right corner of every screen.</p>`,
     cta:"Got it!" },
 
-  { id:"overview", heading:"Here are the accounts and apps we need to set up.",
-    body:`<p>These are logins &amp; tools that Intus uses every day. Later, we'll bring in more job-specific tools you may need.</p>
+  { id:"overview", group:"Getting started",
+    heading:"Here are the accounts and apps we need to set up.",
+    body:`<p>These are logins and tools that Intus uses every day. Later, we'll bring in more job-specific tools you may need.</p>
           <p>Your account set up will take place over two days, with the schedule outlined below:</p>
           <p><strong>Day one</strong></p>
           <ol><li><strong>New laptop password</strong></li>
               <li><strong>Your company Microsoft account</strong> and Outlook inbox</li>
               <li><strong>1Password</strong>, our company password manager</li>
               <li><strong>NordLayer VPN</strong></li>
-              <li><strong>Slack</strong>, a messaging app &amp; our hub of day-to-day communication</li>
+              <li><strong>Slack</strong>, a messaging app and our hub of day-to-day communication</li>
               <li>Completion of important <strong>Security Training</strong></li></ol>
           <p><strong>Day two</strong></p>
           <ol start="7"><li><strong>Atlassian</strong></li>
@@ -207,14 +254,14 @@ const STEPS = [
           <p>Once we finish these steps we'll be ready for onboarding!</p>`,
     cta:"Let's begin!" },
 
-  /* ---------- SECTION 1 — Laptop password ---------- */
-  { id:"pw-intro", section:1, secTitle:"New Laptop Password", cover:true,
+  /* SECTION 1 */
+  { id:"pw-intro", group:"1 &middot; New laptop password", section:1, secTitle:"New Laptop Password", cover:true,
     heading:"New Laptop Password",
     img:{file:"04-macbook.png", label:"MacBook laptop photo"},
     body:`<p>Let's replace your default laptop password with something <strong>unique</strong> and <strong>secure</strong>. We'll cover some guidelines for secure password creation, then show you how to update it in MacOS or Windows.</p>`,
     cta:"Continue" },
 
-  { id:"pw-secure", section:1, secTitle:"New Laptop Password",
+  { id:"pw-secure", group:"1 &middot; New laptop password", section:1, secTitle:"New Laptop Password",
     heading:"What makes a password secure?",
     body:`<p>Secure passwords are crucial to protecting your accounts and information. Please follow these rules for any passwords you create:</p>
           <p><strong>1. Create a long password</strong>, ideally 16 characters, that is made up of unique, unrelated words (e.g. solarium-nutty-instep-banana)</p>
@@ -223,16 +270,16 @@ const STEPS = [
           <p>Some services may require the use of special characters (e.g. ?, !, $, %) as well, but length and uniqueness are the most important factors for a secure password.</p>`,
     cta:"Let's see an example" },
 
-  { id:"pw-examples", section:1, secTitle:"New Laptop Password",
+  { id:"pw-examples", group:"1 &middot; New laptop password", section:1, secTitle:"New Laptop Password",
     heading:"Password examples",
     body:`<p>An example of a bad vs. good password can be seen by entering the two example passwords into this site:</p>
-          <p><a href="https://www.security.org/how-secure-is-my-password/" target="_blank" rel="noopener">Security.org – How secure is my password?</a></p>
-          <p><strong>Aw3s0m3!</strong> – will take a computer 8 hours to crack</p>
-          <p><strong>solarium-nutty-instep-banana</strong> – will take a computer <em>1 octillion years</em> to crack</p>
+          <p><a href="https://www.security.org/how-secure-is-my-password/" target="_blank" rel="noopener">Security.org, How secure is my password?</a></p>
+          <p><strong>Aw3s0m3!</strong> will take a computer 8 hours to crack.</p>
+          <p><strong>solarium-nutty-instep-banana</strong> will take a computer <em>1 octillion years</em> to crack.</p>
           <p>Hopefully that makes it clear why longer passwords are better. Now let's update our laptop password!</p>`,
     cta:"Continue" },
 
-  { id:"pw-type", section:1, secTitle:"New Laptop Password",
+  { id:"pw-type", group:"1 &middot; New laptop password", section:1, secTitle:"New Laptop Password",
     heading:"What type of laptop are you using?",
     body:``,
     choices:[
@@ -240,48 +287,46 @@ const STEPS = [
       {key:"B", label:"Windows", action:"goto", to:"pw-win"}
     ]},
 
-  { id:"pw-mac", section:1, secTitle:"New Laptop Password",
+  { id:"pw-mac", group:"1 &middot; New laptop password", section:1, secTitle:"New Laptop Password",
     heading:"Update your laptop password (Mac)",
     body:`<ol><li>Click the <strong>Apple icon</strong> in the top-left of the screen</li>
-             <li>Navigate to <strong>System Settings → Users &amp; Groups</strong></li>
-             <li>Click the ⓘ next to your name and then <strong>Change</strong> next to Password.</li></ol>`,
-    img:{file:"07-mac-users-groups.png", label:"Mac System Settings — Users & Groups"},
+             <li>Navigate to <strong>System Settings &gt; Users &amp; Groups</strong></li>
+             <li>Click the &#9432; next to your name and then <strong>Change</strong> next to Password.</li></ol>`,
+    img:{file:"07-mac-users-groups.png", label:"Mac System Settings, Users & Groups"},
     continueTo:"m365-intro",
     choices:[
       {key:"A", label:"Password updated! Let's continue", action:"advance"},
       {key:"B", label:"I need some help", action:"help"}
     ]},
 
-  { id:"pw-win", section:1, secTitle:"New Laptop Password",
+  { id:"pw-win", group:"1 &middot; New laptop password", section:1, secTitle:"New Laptop Password",
     heading:"Update your laptop password (Windows)",
-    body:`<ol><li>Press <strong>Ctrl + Alt + Delete</strong></li>
-             <li>Choose <strong>Change a password</strong></li>
-             <li>Enter your current password, then your new secure password twice, and confirm.</li></ol>`,
-    img:{file:"07-windows-password.png", label:"Windows — Change a password screen"},
+    body:`<p>To change your password, go to <strong>Start &gt; Settings &gt; Accounts &gt; Sign-in options</strong>. Select <strong>Password</strong>, and then select <strong>Change</strong>.</p>`,
+    img:{file:"07-windows-password.png", label:"Windows, Sign-in options screen"},
     continueTo:"m365-intro",
     choices:[
       {key:"A", label:"Password updated! Let's continue", action:"advance"},
       {key:"B", label:"I need some help", action:"help"}
     ]},
 
-  /* ---------- SECTION 2 — Microsoft 365 ---------- */
-  { id:"m365-intro", section:2, secTitle:"Microsoft 365", cover:true,
-    heading:"Your Intus Microsoft 365 account and Outlook inbox",
-    body:`<p>Intus Care uses Microsoft 365 for company email, shared calendars, and file sharing. You'll also use your Microsoft 365 account to access other important applications.</p>
+  /* SECTION 2 */
+  { id:"m365-intro", group:"2 &middot; Microsoft 365", section:2, secTitle:"Microsoft 365", cover:true,
+    heading:"Your IntusCare Microsoft 365 account and Outlook inbox",
+    body:`<p>IntusCare uses Microsoft 365 for company email, shared calendars, and file sharing. You'll also use your Microsoft 365 account to access other important applications.</p>
           <p>Let's get logged in to your company Microsoft 365 account!</p>`,
     cta:"M365 Setup" },
 
-  { id:"m365-2fa", section:2, secTitle:"Microsoft 365",
+  { id:"m365-2fa", group:"2 &middot; Microsoft 365", section:2, secTitle:"Microsoft 365",
     heading:"First, a note on 2-step authentication (also known as 2FA)",
     body:`<p>2-step authentication is an essential security feature to avoid having a single point of failure if an account is compromised. <strong>This step is required</strong>, and if skipped you will get locked out of your Microsoft 365 account in the near future.</p>
           <p>In general with any app or software we use, setting up 2FA is highly encouraged.</p>`,
     cta:"I understand" },
 
-  { id:"m365-activate", section:2, secTitle:"Microsoft 365",
+  { id:"m365-activate", group:"2 &middot; Microsoft 365", section:2, secTitle:"Microsoft 365",
     heading:"Activate Microsoft 365 and set up 2-step authentication!",
     body:`<p><strong>1.</strong> In your web browser, go to <a href="https://portal.office.com" target="_blank" rel="noopener">portal.office.com</a> and sign in with the credentials in your welcome email.</p>
-          <div class="note">Your <strong>username</strong> and <strong>temporary password</strong> were sent to you in your day-one welcome email. Can't find it? Message the helpdesk at ${CONFIG.helpdeskSlack}.</div>
-          <p>You will be prompted to <strong>change your password</strong> the first time you sign in — remember the password guidelines from earlier!</p>
+          <div class="note">Your <strong>username</strong> and <strong>temporary password</strong> were sent to you in your day-one welcome email. Can't find it? Use the Get help button.</div>
+          <p>You will be prompted to <strong>change your password</strong> the first time you sign in. Remember the password guidelines from earlier!</p>
           <p>Once you've changed your password, you should be prompted to set up <strong>two-step authentication</strong>. If you don't receive the prompt, you can do this here: <a href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">mysignins.microsoft.com/security-info</a></p>
           <p>You can choose either your <strong>Phone Number</strong> or the <strong>Microsoft Authenticator app</strong>, available in both the Apple App Store and Google Play Store.</p>`,
     choices:[
@@ -289,29 +334,29 @@ const STEPS = [
       {key:"B", label:"I need some help", action:"help"}
     ]},
 
-  /* ---------- SECTION 3 — 1Password ---------- */
-  { id:"op-intro", section:3, secTitle:"1Password", cover:true,
+  /* SECTION 3 */
+  { id:"op-intro", group:"3 &middot; 1Password", section:3, secTitle:"1Password", cover:true,
     heading:"1Password, our company password manager",
     img:{file:"12-1password-logo.png", label:"1Password logo"},
     body:`<p>A password manager makes it easy to create, save, and share passwords securely. We'll explain how to activate your 1Password account, disable Chrome's password manager, and share some helpful tips.</p>`,
     cta:"Continue" },
 
-  { id:"op-about", section:3, secTitle:"1Password",
+  { id:"op-about", group:"3 &middot; 1Password", section:3, secTitle:"1Password",
     heading:"About your 1Password account",
     body:`<p>1Password will create, save, and auto-fill secure passwords for you. Each time it does this, it will ask for you to log in using your Microsoft credentials, so you only need to remember one password for everything.</p>
           <p><strong>Please do not use any other password managers (such as your own personal password manager, or Chrome's inbuilt password manager) to store your company passwords.</strong> We'll show you how to deactivate Chrome's password manager after you set up your 1Password account.</p>`,
     cta:"Got it, continue" },
 
-  { id:"op-activate", section:3, secTitle:"1Password",
+  { id:"op-activate", group:"3 &middot; 1Password", section:3, secTitle:"1Password",
     heading:"1Password Activation",
     body:`<p>Check your inbox for an invite, then follow the steps in the email to create your account!</p>
-          <p><em>Please note</em> – once you accept your invitation, an administrator will need to approve your account, which may take a short period of time.</p>`,
+          <p><em>Please note</em>, once you accept your invitation, an administrator will need to approve your account, which may take a short period of time.</p>`,
     choices:[
       {key:"A", label:"Account created!", action:"advance"},
       {key:"B", label:"I need some help", action:"help"}
     ]},
 
-  { id:"op-using", section:3, secTitle:"1Password",
+  { id:"op-using", group:"3 &middot; 1Password", section:3, secTitle:"1Password",
     heading:"Using 1Password",
     body:`<p>There are a variety of options for using 1Pass and you can choose what works best for you. The Chrome extension is great if you only want to use 1Pass in your browser, while the desktop app can manage passwords for multiple applications.</p>
           <p class="links">
@@ -323,7 +368,7 @@ const STEPS = [
           <p>Lastly, you can log into <a href="https://intuscare.1password.com/signin" target="_blank" rel="noopener">intuscare.1password.com/signin</a> and access saved passwords through your browser.</p>`,
     cta:"Continue" },
 
-  { id:"op-chrome", section:3, secTitle:"1Password",
+  { id:"op-chrome", group:"3 &middot; 1Password", section:3, secTitle:"1Password",
     heading:"Turn off Chrome password manager",
     body:`<p>If you are using Google Chrome, let's deactivate Chrome's built-in password manager so 1Password can take over. (If you're not using Chrome, skip this step).</p>
           <p><strong>Note:</strong> if you already installed the Chrome extension for 1pass, you can skip this step.</p>
@@ -332,81 +377,81 @@ const STEPS = [
     img:{file:"16-chrome-settings.png", label:"Chrome password settings"},
     cta:"Continue" },
 
-  { id:"op-new", section:3, secTitle:"1Password",
+  { id:"op-new", group:"3 &middot; 1Password", section:3, secTitle:"1Password",
     heading:"New to 1Pass?",
     body:`<p>Here are some quick start guides to get familiar with using a password manager:</p>
           <p class="links">
-            <a href="https://support.1password.com/getting-started-mac/" target="_blank" rel="noopener">1Password – Getting started on Mac</a>
-            <a href="https://support.1password.com/getting-started-windows/" target="_blank" rel="noopener">1Password – Getting started on Windows</a>
-            <a href="https://support.1password.com/getting-started-browser/" target="_blank" rel="noopener">1Password – Getting started in your Browser</a>
+            <a href="https://support.1password.com/getting-started-mac/" target="_blank" rel="noopener">1Password, Getting started on Mac</a>
+            <a href="https://support.1password.com/getting-started-windows/" target="_blank" rel="noopener">1Password, Getting started on Windows</a>
+            <a href="https://support.1password.com/getting-started-browser/" target="_blank" rel="noopener">1Password, Getting started in your Browser</a>
           </p>
-          <p>💡 <em>Tip: bookmark these in your browser so you can read or refer to them later!</em></p>`,
+          <p>&#128161; <em>Tip: bookmark these in your browser so you can read or refer to them later!</em></p>`,
     cta:"Continue" },
 
-  /* ---------- SECTION 4 — NordLayer ---------- */
-  { id:"nl-intro", section:4, secTitle:"NordLayer VPN", cover:true,
+  /* SECTION 4 */
+  { id:"nl-intro", group:"4 &middot; NordLayer VPN", section:4, secTitle:"NordLayer VPN", cover:true,
     heading:"NordLayer VPN",
-    body:`<p>You've been assigned a NordLayer VPN license. Please follow the instructions in the following slides carefully to set up your NordLayer account.</p>
-          <p>If you run into problems at any point during NordLayer setup, you can reach out to the helpdesk at ${CONFIG.helpdeskSlack} or <a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a>.</p>`,
+    body:`<p>You've been assigned a NordLayer VPN license. Please follow the instructions in the following slides carefully to set up your NordLayer account.</p>`,
     cta:"Continue" },
 
-  { id:"nl-download", section:4, secTitle:"NordLayer VPN",
+  { id:"nl-download", group:"4 &middot; NordLayer VPN", section:4, secTitle:"NordLayer VPN",
     heading:"Download NordLayer",
     body:`<p><strong>1.</strong> Click <a href="https://nordlayer.com/download/" target="_blank" rel="noopener">here</a> to <strong>download</strong> NordLayer VPN</p>
-          <p><em>Make sure to choose the correct version – Windows or MacOS, depending on your laptop type</em></p>
+          <p><em>Make sure to choose the correct version, Windows or MacOS, depending on your laptop type.</em></p>
           <p><strong>2.</strong> When the download is complete, install and launch NordLayer.</p>
           <p><strong>3.</strong> When asked for your Organization ID, enter <strong>"intus-care"</strong></p>`,
-    img:{file:"19-nordlayer-orgid.png", label:"NordLayer — Organization ID = intus-care"},
+    img:{file:"19-nordlayer-orgid.png", label:"NordLayer, Organization ID = intus-care"},
     cta:"Next" },
 
-  { id:"nl-login", section:4, secTitle:"NordLayer VPN",
+  { id:"nl-login", group:"4 &middot; NordLayer VPN", section:4, secTitle:"NordLayer VPN",
     heading:"Logging in to NordLayer",
-    body:`<p><strong>3.</strong> When you reach the login page, click on <strong>Entra ID</strong> – this will allow you log in using your Microsoft 365 credentials.</p>
-          <p>If you run into any issues setting up, let us know at ${CONFIG.helpdeskSlack} or <a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a>!</p>`,
-    img:{file:"20-entra-id.png", label:"NordLayer — Entra ID login button"},
+    body:`<p><strong>3.</strong> When you reach the login page, click on <strong>Entra ID</strong>. This will allow you to log in using your Microsoft 365 credentials.</p>`,
+    img:{file:"20-entra-id.png", label:"NordLayer, Entra ID login button"},
     cta:"All set with NordLayer!" },
 
-  /* ---------- SECTION 5 — Slack ---------- */
-  { id:"slack-intro", section:5, secTitle:"Slack", cover:true,
+  /* SECTION 5 */
+  { id:"slack-intro", group:"5 &middot; Slack", section:5, secTitle:"Slack", cover:true,
     heading:"Slack, our hub of day-to-day communication",
     img:{file:"21-slack-logo.png", label:"Slack logo"},
-    body:`<p>Our go-to messaging app for many years, Slack is where we do most of our internal communication on a daily basis. First we'll create a Slack account and join the Intus Care workspace. You can then choose whether to use Slack in your web browser or the desktop app (pre-installed for you).</p>`,
+    body:`<p>Our go-to messaging app for many years, Slack is where we do most of our internal communication on a daily basis. First we'll create a Slack account and join the IntusCare workspace. You can then choose whether to use Slack in your web browser or the desktop app (pre-installed for you).</p>`,
     cta:"Continue" },
 
-  { id:"slack-create", section:5, secTitle:"Slack",
-    heading:"Create your Slack account and join the Intus Care workspace",
+  { id:"slack-create", group:"5 &middot; Slack", section:5, secTitle:"Slack",
+    heading:"Create your Slack account and join the IntusCare workspace",
     body:`<p>Check your email inbox for an invite to Slack, and follow the link provided to get your account set up!</p>
           <p>You can also access Slack via the 'waffle' button from your Microsoft Outlook inbox, located in the top left corner (see the adjacent image).</p>`,
-    img:{file:"22-m365-launcher-slack.png", label:"Microsoft 365 app launcher — Slack highlighted"},
+    img:{file:"22-m365-launcher-slack.png", label:"Microsoft 365 app launcher, Slack highlighted"},
     choices:[
       {key:"A", label:"Done! Let's continue", action:"advance"},
       {key:"B", label:"I need some help", action:"help"}
     ]},
 
-  { id:"slack-open", section:5, secTitle:"Slack",
+  { id:"slack-open", group:"5 &middot; Slack", section:5, secTitle:"Slack",
     heading:"Opening the Slack App",
     body:`<p>The Slack desktop app is already installed on your laptop.</p>
-          <p>With Slack open in your browser, click on <strong>Intus Care → Open the desktop app</strong> in the top-left of the window.</p>
+          <p>With Slack open in your browser, click on <strong>IntusCare &gt; Open the desktop app</strong> in the top-left of the window.</p>
           <p>If you're using a Mac, you can also use Mac's "spotlight search" to quickly locate Slack and other applications:</p>
-          <p><strong>1.</strong> Press <strong>command (⌘) + space</strong><br>
+          <p><strong>1.</strong> Press <strong>command (&#8984;) + space</strong><br>
              <strong>2.</strong> Type "Slack" in the search bar<br>
              <strong>3.</strong> Press <strong>Enter</strong> to open the app</p>
           <p>Using the desktop app is optional. If you prefer to access Slack via your web browser, that's up to you!</p>
           <p>If this is the first time you've used Slack, this getting started guide may be helpful!</p>
-          <p><a href="https://slack.com/help/articles/218080037-Getting-started-for-new-Slack-users" target="_blank" rel="noopener">Slack – Getting started for new users</a></p>`,
+          <p><a href="https://slack.com/help/articles/218080037-Getting-started-for-new-Slack-users" target="_blank" rel="noopener">Slack, Getting started for new users</a></p>`,
     cta:"All set with Slack!" },
 
-  /* ---------- DAY ONE CLOSE (unnumbered) ---------- */
-  { id:"sec-training", heading:"Security Training and Drata Policy Acknowledgements",
+  /* DAY ONE WRAP-UP (unnumbered) */
+  { id:"sec-training", group:"Day one wrap-up",
+    heading:"Security Training and Drata Policy Acknowledgements",
     body:`<p>Once you've been able to log in to your Intus O365 account and Outlook mailbox, you'll need to complete mandatory security training and Drata policy acknowledgements.</p>
           <p>Check your email inbox or reach out to your manager for more information on these!</p>
           <p><strong>That's it for day one!</strong></p>
           <p><strong>On the morning of your second day, please return to this guide to finish your account setup.</strong></p>
-          <p><em>(Please do not attempt to set up any of the following accounts until your second day – you will not be able to access any of the accounts in the following slides until then)</em></p>`,
-    cta:"Day 2 – let's go!" },
+          <p><em>(Please do not attempt to set up any of the following accounts until your second day. You will not be able to access any of the accounts in the following slides until then.)</em></p>`,
+    cta:"Day 2, let's go!" },
 
-  /* ---------- DAY TWO (unnumbered) ---------- */
-  { id:"day-two", heading:"Day Two, let's go!",
+  /* DAY TWO (unnumbered) */
+  { id:"day-two", group:"Day two",
+    heading:"Day Two, let's go!",
     body:`<p>Congratulations on finishing your first day and completing your security training!</p>
           <p>The following slides will guide you through the remaining account setup you need to complete today. We'll be covering the following:</p>
           <ul><li><strong>Atlassian</strong></li>
@@ -416,93 +461,94 @@ const STEPS = [
           <p>As a reminder, please don't proceed past this point unless you are on your second day and have completed the required security training.</p>`,
     cta:"Let's get started!" },
 
-  { id:"atlassian", heading:"Atlassian",
-    body:`<p>You have been assigned access to the Atlassian system – used for accessing Confluence and Jira. Please follow the steps below to access your account!</p>
+  { id:"atlassian", group:"Day two",
+    heading:"Atlassian",
+    body:`<p>You have been assigned access to the Atlassian system, used for accessing Confluence and Jira. Please follow the steps below to access your account!</p>
           <p><strong>1.</strong> Navigate to the link below to log in to your Atlassian account: <a href="https://id.atlassian.com/login" target="_blank" rel="noopener">https://id.atlassian.com/login</a></p>
           <p><strong>2.</strong> Click on the <strong>Microsoft</strong> logo/button to log in using your Microsoft 365 credentials.</p>
           <p>You can check with your manager on which projects or spaces you should be working with in Atlassian!</p>`,
-    img:{file:"26-atlassian-login.png", label:"Atlassian login — Microsoft button"},
+    img:{file:"26-atlassian-login.png", label:"Atlassian login, Microsoft button"},
     cta:"Let's Continue" },
 
-  { id:"airtable", heading:"Airtable",
+  { id:"airtable", group:"Day two",
+    heading:"Airtable",
     body:`<p>You've also been assigned an Airtable account. Follow the steps below to sign in and activate your account!</p>
           <p><strong>1.</strong> Navigate to <a href="https://airtable.com/login" target="_blank" rel="noopener">https://airtable.com/login</a></p>
           <p><strong>2.</strong> Click 'Sign in with Single Sign On' (see screenshot)</p>
-          <p><strong>3.</strong> Enter your Intus Care email address and click 'Sign in with Single Sign On'. You will now be redirected to log in using your Microsoft 365 credentials.</p>`,
-    img:{file:"27-airtable-sso.png", label:"Airtable — Sign in with Single Sign On"},
+          <p><strong>3.</strong> Enter your IntusCare email address and click 'Sign in with Single Sign On'. You will now be redirected to log in using your Microsoft 365 credentials.</p>`,
+    img:{file:"27-airtable-sso.png", label:"Airtable, Sign in with Single Sign On"},
     cta:"All set with Airtable!" },
 
-  { id:"access-m365", heading:"Accessing accounts provisioned via Microsoft 365",
+  { id:"access-m365", group:"Day two",
+    heading:"Accessing accounts provisioned via Microsoft 365",
     body:`<p>Depending on your role, you may also have been assigned additional accounts that you did not receive email invitations for.</p>
           <p>Some accounts at Intus are provisioned directly via your M365 account. To access these, <strong>open your Microsoft Outlook email inbox</strong> in the browser, and <strong>click the 'waffle' button</strong> (also known as the app launcher) at the top left of the screen. You'll be able to directly launch any other accounts you have access to from here!</p>
           <p><em>(You'll see that you can access Airtable, 1Password and other accounts from here also!)</em></p>`,
     img:{file:"28-outlook-launcher.png", label:"Outlook app launcher (waffle menu)"},
     cta:"Continue" },
 
-  { id:"check-email", heading:"Checking your email for other invites",
+  { id:"check-email", group:"Day two",
+    heading:"Checking your email for other invites",
     body:`<p>Depending on what team you are on at Intus, you may have some invites to other applications waiting in your email. Take a minute to look through your inbox for emails inviting you to join the team in apps that haven't been mentioned here.</p>`,
     cta:"Continue" },
 
-  /* ---------- SECTION 6 — Wrap up ---------- */
-  { id:"made-it", section:6, secTitle:"We made it!", cover:true,
+  /* SECTION 6 */
+  { id:"made-it", group:"6 &middot; We made it", section:6, secTitle:"We made it!", cover:true,
     heading:"We made it! That's everything we need for now.",
     body:`<p>We recommend bookmarking these in your browser if you haven't already:</p>
-          <p><strong>Microsoft</strong> – <a href="https://portal.office.com" target="_blank" rel="noopener">portal.office.com</a><br>
-             <strong>Slack</strong> – <a href="https://intus-care.slack.com/" target="_blank" rel="noopener">intus-care.slack.com</a></p>
+          <p><strong>Microsoft:</strong> <a href="https://portal.office.com" target="_blank" rel="noopener">portal.office.com</a><br>
+             <strong>Slack:</strong> <a href="https://intus-care.slack.com/" target="_blank" rel="noopener">intus-care.slack.com</a></p>
           <p>Let's wrap up with some final details and a preview of what's next.</p>`,
     cta:"Continue" },
 
-  { id:"support-it", section:6, secTitle:"We made it!",
+  { id:"support-it", group:"6 &middot; We made it", section:6, secTitle:"We made it!",
     heading:"Requesting Technology Support from IT",
     body:`<p>If you need help with your laptop, software, or general IT support at any point during your time with Intus, reach out via these support channels:</p>
           <p><strong>Email us:</strong><br><a href="mailto:${CONFIG.helpdeskEmail}">${CONFIG.helpdeskEmail}</a></p>
-          <p><strong>Slack us:</strong><br>${CONFIG.helpdeskSlack}</p>
+          <p><strong>Slack us:</strong><br>Message us in the <strong>${CONFIG.helpdeskSlack}</strong> channel on Slack.</p>
           <p><strong>(Optional) Schedule a follow-up meeting with Evan from IT:</strong><br>
-             <a href="https://outlook.office.com/bookwithme/user/7c138ce5997a492bb3458c53b3f52f67@intus.care/meetingtype/0Cm233rY6ECHMMFEKHz3Kg2?anonymous&ismsaljsauthenabled&ep=mcard" target="_blank" rel="noopener">Book time with Evan Yearwood: Onboarding Meet – 30 minutes</a></p>
-          <p>💡 <em>Tip: Star the helpdesk Slack channel for easy access!</em></p>`,
+             <a href="https://outlook.office.com/bookwithme/user/7c138ce5997a492bb3458c53b3f52f67@intus.care/meetingtype/0Cm233rY6ECHMMFEKHz3Kg2?anonymous&ismsaljsauthenabled&ep=mcard" target="_blank" rel="noopener">Book time with Evan Yearwood: Onboarding Meet, 30 minutes</a></p>
+          <p>&#128161; <em>Tip: Star the #it-support Slack channel for easy access!</em></p>`,
     cta:"Continue" },
 
-  { id:"final", section:6, secTitle:"We made it!", submit:true,
+  { id:"final", group:"6 &middot; We made it", section:6, secTitle:"We made it!", end:true,
     heading:"Now that laptop setup is complete, your next onboarding activity will kick off soon!",
-    body:`<p>Open your <strong>Outlook Calendar</strong> to see the next activity scheduled for today – if there isn't one, try reaching out to your manager to see what's next!</p>
-          <p>Have a wonderful first week 😄!</p>`,
-    cta:"Submit" }
+    body:`<p>Open your <strong>Outlook Calendar</strong> to see the next activity scheduled for today. If there isn't one, try reaching out to your manager to see what's next!</p>
+          <p>Have a wonderful first week &#128512;!</p>` }
 ];
 
 /* ============================================================
-   ENGINE — you shouldn't need to edit below here
+   ENGINE
    ============================================================ */
 const byId = Object.fromEntries(STEPS.map(s=>[s.id,s]));
 const idx  = id => STEPS.findIndex(s=>s.id===id);
-let history = [];          // visited ids (for Back)
+let history = [];
 let current = "welcome";
 
 const cardEl = document.getElementById("card");
 const eyebrowEl = document.getElementById("eyebrow");
 const barEl = document.getElementById("bar");
+const overlay = document.getElementById("overlay");
+const drawer = document.getElementById("drawer");
+const scrim = document.getElementById("scrim");
+const navList = document.getElementById("navList");
 
 function imgFallback(el){
   const d = document.createElement("div");
   d.className = "shot-ph";
-  d.innerHTML = `<span class="cam">🖼️</span>${el.dataset.label}
-    <small>Add file <code>images/${el.dataset.file}</code> to this repo and it'll appear here</small>`;
+  d.innerHTML = `<span class="cam">&#128247;</span>${el.dataset.label}
+    <small>Add file <code>images/${el.dataset.file}</code> to this repo and it will appear here</small>`;
   el.replaceWith(d);
 }
 
 function render(step){
-  // eyebrow / top bar
   if(step.section && !step.cover){
-    eyebrowEl.className = "eyebrow";
     eyebrowEl.innerHTML = `<span class="num">${step.section}</span>${step.secTitle}`;
-  } else {
-    eyebrowEl.className = "eyebrow hidden";
-    eyebrowEl.innerHTML = "";
-  }
-  // progress
+  } else { eyebrowEl.innerHTML = ""; }
   barEl.style.width = ((idx(step.id))/(STEPS.length-1)*100).toFixed(1) + "%";
 
   let html = "";
-  if(step.done){
+  if(step.end){
     html += `<div class="done-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>`;
   }
   const tag = step.h===1 ? "h1" : "h2";
@@ -521,11 +567,13 @@ function render(step){
       html += `<button class="opt${c.action==='help'?' ghost':''}" data-i="${i}"><span class="key">${c.key}</span>${c.label}</button>`;
     });
     html += `</div>`;
-    html += `<div class="actions"><button class="btn back${history.length?'':' hidden'}" id="backBtn">← Back</button></div>`;
+    html += `<div class="actions"><button class="btn back${history.length?'':' hidden'}" id="backBtn">&larr; Back</button></div>`;
     html += `<div class="hint">Press <kbd>A</kbd> or <kbd>B</kbd> to choose</div>`;
+  } else if(step.end){
+    html += `<div class="actions"><button class="btn back${history.length?'':' hidden'}" id="backBtn">&larr; Back</button></div>`;
   } else {
     html += `<div class="actions">
-      <button class="btn back${history.length?'':' hidden'}" id="backBtn">← Back</button>
+      <button class="btn back${history.length?'':' hidden'}" id="backBtn">&larr; Back</button>
       <button class="btn" id="nextBtn">${step.cta||'Continue'}</button></div>`;
     html += `<div class="hint">Press <kbd>Enter</kbd> to continue</div>`;
   }
@@ -541,47 +589,76 @@ function render(step){
     btn.addEventListener("click", ()=>choose(step.choices[btn.dataset.i]));
   });
   (document.getElementById("nextBtn") || cardEl.querySelector(".opt"))?.focus();
+  highlightNav();
   window.scrollTo({top:0});
 }
 
-function goTo(id){ history.push(current); current = id; render(byId[id]); }
-
+function goTo(id){ if(id===current) return; history.push(current); current = id; render(byId[id]); }
 function advance(){
   const step = byId[current];
   const nextId = step.continueTo || STEPS[idx(current)+1]?.id;
   if(nextId) goTo(nextId);
 }
 function choose(c){
-  if(c.action==="help") return document.getElementById("overlay").classList.add("open");
+  if(c.action==="help") return openHelp();
   if(c.action==="goto") return goTo(c.to);
   if(c.action==="advance") return advance();
 }
-function back(){
-  if(!history.length) return;
-  current = history.pop();
-  render(byId[current]);
+function back(){ if(!history.length) return; current = history.pop(); render(byId[current]); }
+
+/* navigator */
+function buildNav(){
+  const order=[]; const map={};
+  STEPS.forEach(s=>{ if(!map[s.group]){map[s.group]=[];order.push(s.group);} map[s.group].push(s); });
+  let html="";
+  order.forEach(g=>{
+    html += `<div class="nav-group">${g}</div>`;
+    map[g].forEach(s=>{
+      const tmp=document.createElement("div"); tmp.innerHTML=s.heading;
+      let t=(tmp.textContent||"").trim(); if(t.length>48) t=t.slice(0,46)+"...";
+      html += `<button class="nav-item" data-id="${s.id}">${t}</button>`;
+    });
+  });
+  navList.innerHTML=html;
+  navList.querySelectorAll(".nav-item").forEach(b=>{
+    b.addEventListener("click", ()=>{ closeNav(); goTo(b.dataset.id); });
+  });
 }
+function highlightNav(){
+  navList.querySelectorAll(".nav-item").forEach(b=>{
+    b.classList.toggle("current", b.dataset.id===current);
+  });
+}
+function openNav(){ drawer.classList.add("open"); scrim.classList.add("open"); }
+function closeNav(){ drawer.classList.remove("open"); scrim.classList.remove("open"); }
+document.getElementById("navToggle").addEventListener("click", openNav);
+document.getElementById("navClose").addEventListener("click", closeNav);
+scrim.addEventListener("click", closeNav);
+
+/* help */
+function openHelp(){ overlay.classList.add("open"); }
+document.getElementById("helpFab").addEventListener("click", openHelp);
+overlay.addEventListener("click", e=>{ if(e.target.id==="overlay") overlay.classList.remove("open"); });
+const mMail=document.getElementById("mMail");
+mMail.textContent=CONFIG.helpdeskEmail; mMail.href="mailto:"+CONFIG.helpdeskEmail;
+document.getElementById("mSlack").textContent=CONFIG.helpdeskSlack;
 
 /* keyboard */
 document.addEventListener("keydown", e=>{
-  if(document.getElementById("overlay").classList.contains("open")) return;
+  if(overlay.classList.contains("open") || drawer.classList.contains("open")){
+    if(e.key==="Escape"){ overlay.classList.remove("open"); closeNav(); }
+    return;
+  }
   const step = byId[current];
-  if(e.key==="Enter" && !step.choices){ document.getElementById("nextBtn")?.click(); }
+  if(e.key==="Enter" && !step.choices && !step.end){ document.getElementById("nextBtn")?.click(); }
   if(step.choices){
     if(e.key.toLowerCase()==="a") cardEl.querySelector('.opt[data-i="0"]')?.click();
     if(e.key.toLowerCase()==="b") cardEl.querySelector('.opt[data-i="1"]')?.click();
   }
 });
 
-/* help modal contacts */
-const mMail=document.getElementById("mMail");
-mMail.textContent=CONFIG.helpdeskEmail; mMail.href="mailto:"+CONFIG.helpdeskEmail;
-document.getElementById("mSlack").textContent=CONFIG.helpdeskSlack;
-document.getElementById("overlay").addEventListener("click",e=>{
-  if(e.target.id==="overlay") e.currentTarget.classList.remove("open");
-});
-
 /* start */
+buildNav();
 render(byId[current]);
 </script>
 </body>
